@@ -10,6 +10,7 @@ CREATE TABLE users (
 
 CREATE INDEX ON users (email);
 
+
 CREATE TABLE companies (
 	company_id serial PRIMARY KEY,
 	user_id integer REFERENCES users (user_id),
@@ -22,6 +23,9 @@ CREATE TABLE companies (
     last_modified TIMESTAMP 
 );
 
+CREATE INDEX ON companies (company_id);
+CREATE INDEX ON companies (user_id);
+
 CREATE TABLE jobs (
 	job_id serial PRIMARY KEY,
 	company_id integer REFERENCES companies (company_id),
@@ -33,3 +37,6 @@ CREATE TABLE jobs (
 	created_on TIMESTAMP NOT NULL,
     last_modified TIMESTAMP 
 );
+
+CREATE INDEX ON jobs (job_id, company_id);
+CREATE INDEX ON jobs (active, remote, city, description, title);
