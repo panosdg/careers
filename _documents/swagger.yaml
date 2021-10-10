@@ -1,0 +1,567 @@
+openapi: 3.0.0
+info:
+  title: Career Web Application
+  description: Api client - Api Core
+  version: 1.0.0
+servers:
+- url: http://localhost:3000
+  description: Staging Server
+- url: http://127.0.0.1:3000
+  description: Local Server
+paths: 
+  "/user/sign-up":
+    post: 
+      tags:
+      - SIGNUP
+      summary: Sign-up a User
+      operationId: api_user_sign-up
+      requestBody:
+        '$ref': '#/components/requestBodies/user_sign-up'
+      responses:
+        "200":
+          description: User sign-up successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+  "/user/login":
+    post:
+      tags:
+      - LOGIN
+      summary: User Login
+      operationId: api_user_login
+      requestBody:
+        $ref: '#/components/requestBodies/user_login'
+      responses:
+        "200":
+          description: User logged-in successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "404":
+          description: Login Failed-Anauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_404'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+      x-swagger-router-controller: OTP  
+  "/company/create":
+    post:
+      tags:
+        - COMPANY_CREATION
+      summary: Create a new Company
+      operationId: api_user_create_company
+      requestBody: 
+        $ref: '#/components/requestBodies/create_company'
+      responses:
+        "200":
+          description: Company created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "403":
+          description: Unauthorised Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_403'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+  "/company/:company_id/update":
+    post:
+      tags:
+        - COMPANY_CREATION
+      summary: Create a new Company
+      operationId: api_user_update_company
+      requestBody: 
+        $ref: '#/components/requestBodies/update_company'
+      responses:
+        "200":
+          description: Company updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "403":
+          description: Unauthorised request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_403'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+  "/company/:company_id":
+    delete:
+      tags:
+        - DELETE_COMPANY
+      summary: Soft delete a Company
+      operationId: api_user_delete_company
+      responses:
+        "200":
+          description: Company deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "403":
+          description: Unauthorised request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_403'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+  "/company/:company_id/job/create":
+    post:
+      tags:
+        - JOB_CREATION
+      summary: Create a new Company s job
+      operationId: api_user_company_create_job
+      requestBody: 
+        $ref: '#/components/requestBodies/create_job'
+      responses:
+        "200":
+          description: Job Created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "403":
+          description: Not Authorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_403'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+  "/company/:company_id/job/:job_id/update":
+    post:
+      tags:
+        - JOB_UPDATE
+      summary: Upadte a companys job
+      operationId: api_user_update_company_job
+      requestBody: 
+        $ref: '#/components/requestBodies/update_job'
+      responses:
+        "200":
+          description: Job updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "403":
+          description: Unauthorised request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_403'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+  "/company/:company_id/job/:job_id":
+    delete:
+      tags:
+        - DELETE_JOB
+      summary: Soft delete a hob
+      operationId: api_user_delete_job
+      responses:
+        "200":
+          description: Job deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_400'
+        "403":
+          description: Unauthorised request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_403'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response_500'
+  "/jobs/search":
+    post:
+      tags:
+      - SEARCH JOB
+      summary: Search a job
+      operationId: api_search_job
+      requestBody:
+        '$ref': '#/components/requestBodies/search_jobs'
+      responses:
+        "200":
+          description: Request successful
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/success_200'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/response_400'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                '$ref': '#/components/schemas/response_500'
+components:
+  schemas:
+    success_200:
+      required:
+        - status
+      type: object
+      properties:
+        status: 
+          type: string
+        data:
+          type: object
+          properties: 
+            companies: 
+              type: array
+              items:
+                '$ref': '#/components/schemas/company'
+            user: 
+              type: 'object'
+            jobs: 
+              type: array
+              items:
+                '$ref': '#/components/schemas/job'
+      example:
+        status: "SUCCESS"
+    response_400: 
+      required:
+        - status
+        - error
+      type: object
+      properties:
+        error:
+          type: string
+        status: 
+          type: string
+      example:
+        status: "FAILED"
+        error: "USER_ALREADY_EXISTS"
+    response_403: 
+      required:
+        - status
+        - error
+      type: object
+      properties:
+        error:
+          type: string
+        status: 
+          type: string
+      example:
+        status: "FAILED"
+        error: "USER_NEEDS_AUTHENTICATION"
+    response_404: 
+      required:
+        - status
+        - error
+      type: object
+      properties:
+        error:
+          type: string
+        status: 
+          type: string
+      example:
+        status: "FAILED"
+        error: "WRONG_PASSWORD"
+    response_500: 
+      required:
+        - status
+        - error
+      type: object
+      properties:
+        error:
+          type: string
+        status: 
+          type: string
+      example:
+        status: "FAILED"
+        error: "GENERAL_ERROR"
+    user_sign-up:
+      required:
+      - name
+      - surnanme
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        surnanme:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: 'John'
+        surnanme: 'Doe'
+        email: 'jdoe@hmail.com'
+        password: '12345'
+    user_login:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: 'jdoe@hmail.com'
+        password: '12345'
+    create_company:
+      required:
+      - name
+      - description
+      - city
+      - industry
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        city:
+          type: string
+        industry:
+          type: string
+      example:
+        name: 'John Doe Ltd'
+        description: 'A company description'
+        city: 'Athens'
+        industry: 'Sales'
+    update_company:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        city:
+          type: string
+        industry:
+          type: string
+      example:
+        city: 'Athens'
+    create_job:
+      required:
+      - title
+      - description
+      - city
+      - remote
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        city:
+          type: string
+        remote:
+          type: boolean
+      example:
+        title: 'DevOps Engineer'
+        description: 'A devOps job description'
+        city: 'Athens'
+        remote: false
+    update_job:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        city:
+          type: string
+        remote:
+          type: boolean
+      example:
+        description: 'A devOps job description'
+        remote: false
+    search_jobs:
+      type: object
+      properties:
+        job_keywords:
+          type: string
+        city:
+          type: string
+        remote:
+          type: boolean
+      example:
+        job_keywords: 'DevOps'
+        city: 'Athens'
+        remote: false
+    company:
+      type: object 
+      properties:
+        company_id: 
+          type: integer
+        user_id:
+          type: integer
+        active: 
+          type: boolean
+        description:
+          type: string
+        city:
+          type: string
+        industry:
+          type: string
+        created_on:
+          example: 1995-09-07T10:40:52Z
+          format: date-time
+          type: string
+        last_modified:
+          example: 1995-09-07T10:40:52Z
+          format: date-time
+          type: string
+    job:
+      type: object
+      properties:
+        job_id:
+          type: integer
+        company_id:
+          type: integer
+        active:
+          type: boolean
+        title:
+          type: string
+        description:
+          type: string
+        city:
+          type: string
+        created_on:
+          example: 1995-09-07T10:40:52Z
+          format: date-time
+          type: string
+        last_modified:
+          example: 1995-09-07T10:40:52Z
+          format: date-time
+          type: string
+  requestBodies:
+    user_sign-up:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user_sign-up'
+    user_login:
+      content:
+        application/json:
+          schema:
+            '$ref': '#/components/schemas/user_login'
+    create_company:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_company'
+    update_company:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_company'
+    create_job:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_job'
+    update_job:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_job'
+    search_jobs:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/search_jobs'
