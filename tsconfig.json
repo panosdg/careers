@@ -13,7 +13,7 @@
                 "node_modules/*"
             ]
         },
-        "typeRoots": ["./node_modules/@types", "./src/custom_typings"]
+        "typeRoots": [ "./src/custom_typings/custom.d.ts", "./node_modules/@types", "./src/custom_typings"]
     },
     "include": [
         "src/**/*"

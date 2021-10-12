@@ -14,24 +14,14 @@ import { verifyToken }      from './middlewares/verifyToken';
 import dbOperations         from './data-control/dbOperations';
 import endpointValidations  from './middlewares/endpointValidations'
 
-
+import {  ResponseObj } from './custom_typings/interfaces'
 
 const app = express();
 const API_PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-interface ResponseBodyObj {
-    status: string,
-    error?: string,
-    data?: any
-    token?: string
-}
 
-interface ResponseObj {
-    statusCode: number,
-    body: ResponseBodyObj
-}
 
 app.post('/user/sign-up', endpointValidations.signUpValidation, async (req, res) => {
     let response: ResponseObj = { body: { status: "SUCCESS" }, statusCode: 200 };

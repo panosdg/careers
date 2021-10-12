@@ -3,7 +3,7 @@ import crypto from 'crypto';
 const algorithm: string = 'aes-256-ctr';
 const secretKey: string = process.env.PWD_SECRET_KEY;
 const iv = crypto.randomBytes(16);
-console.log(`typeof key: ${typeof secretKey} > ${secretKey}`)
+
 const encrypt = (text:string):string => {
 
     const cipher = crypto.createCipheriv(algorithm, secretKey, iv);

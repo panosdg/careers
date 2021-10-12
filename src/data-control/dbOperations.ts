@@ -1,5 +1,5 @@
 import { Client } from 'pg';
-const connectionString = "postgres://mhytlasn:WExa6Rn6QoXN5_fzByoYBK9A-VTbm7bj@surus.db.elephantsql.com/mhytlasn"//process.env.DB_CONN;
+const connectionString = process.env.DB_CONN;
 const pgClient = new Client({ connectionString,})
 pgClient.connect();
 //import pgClient from '../controllers/postgres';
@@ -26,49 +26,15 @@ const executeQuerySync = (query: string) : Promise<any> => new Promise((resolve,
         reject(e);
     }
 })
-interface InsertUserParams {
-    name: string,
-    surname: string,
-    email: string,
-    password: string
-}
 
-interface InsertCompanyParams { 
-    user_id: number, 
-    name: string, 
-    description: string, 
-    city: string, 
-    industry: string 
-}
-
-interface UpdateCompanyParams {
-    name?: string, 
-    description?: string, 
-    city?: string, 
-    industry?: string 
-}
-
-interface SearchJobParams { job_keywords?: string, remote?:boolean, city?: string }
-
-interface InsertJobParams { 
-    company_id: number, 
-    title: string, 
-    description: string, 
-    city: string, 
-    remote: boolean 
-}
-
-interface JobRow {
-    job_id: number,
-    company_id: number,
-    active: boolean,
-    title: string,
-    description: string,
-    city: string,
-    remote: boolean,
-    created_on: Date,
-    last_modified: Date
-  }
+import {
+    InsertUserParams,
+    InsertCompanyParams,
+    UpdateCompanyParams,
+    SearchJobParams,
+    InsertJobParams, 
+    JobRow 
+} from '../custom_typings/interfaces';
 
 export default {
     insertUserSync: async(userParams: InsertUserParams): Promise<any> => {

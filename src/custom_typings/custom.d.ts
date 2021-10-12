@@ -1,6 +1,6 @@
 declare namespace Express {
     export interface Request {
-        profiler?: any;
+        profiler?: any
         decoded_token?: any
     }
 }
